@@ -1,70 +1,66 @@
-# def encrypt(text,s):
-#     for i in range(len(text)):
-#         char = text[i]
-#         if (char.isupper()):
-#             result += chr((ord(char) + s) % 26)
-#         else:
-#             result += chr((ord(char) + s) % 26)
-#             return result
-
-# text = ("CEASER CIPHER DEMO")
-# s = 4  
-
-# print ("Plain Text : " + text)
-# print ("Shift pattern : " + str(s))
-# print ("Cipher: " + encrypt(text,s))
+import os
 
 def encrypt(text,shift):
-
     encryption = ("")
-    
-    
-    for c in text:
-        if c.isupper():
-        # find the position in 0-25
-            c_unicode = ord(c)
-            c_index = c_unicode - ord("A")
-        # perform the shift
-            new_index = (c_index + shift) % 26
-        # convert to new character
+    for x in text:
+        if x.isupper(): #cek apakah huruf kapital
+        # mencari posisi karakter
+            char_unicode = ord(x)
+            char_index = char_unicode - ord("A")
+        # melakukan pergeseran
+            new_index = (char_index + shift) % 26
+        # konversi ke karakter baru
             new_unicode = new_index + ord("A")
             new_character = chr(new_unicode)
-        # append to encrypted string
+        # menambahkan ke string yang sudah dienkripsi
             encryption = encryption + new_character
         else:
-        # since character is not uppercase, leave it as it is
-            encryption += c
-
+        # karena karakter bukan huruf kapital, biarkan saja
+            encryption += x
         
-
-    print("Plain text:",text)
-    print("Encrypted text:",encryption)
-
-
+    print("Plain text : ",text)
+    print("Cipher Text : ",encryption)
 
 
 def decrypt(text,shift):
     decryption = ("")
-    for c in text:
-        if c.isupper():
-        # find the position in 0-25
-            c_unicode = ord(c)
-            c_index = c_unicode - ord("A")
-        # perform the shift
-            new_index = (c_index - shift) % 26
-        # convert to new character
+    for x in text:
+        if x.isupper():  #cek apakah huruf kapital
+        # menemukan posisi dari karakter
+            char_unicode = ord(x)
+            char_index = char_unicode - ord("A")
+        # melakukan pergeseran
+            new_index = (char_index - shift) % 26
+        # konversi ke karakter baru
             new_unicode = new_index + ord("A")
             new_character = chr(new_unicode)
-        # append to encrypted string
+        # menambahkan ke string yang sudah didekripsi
             decryption = decryption + new_character
         else:
-        # since character is not uppercase, leave it as it is
-            decryption += c
+        # karena karakter bukan huruf kapital, biarkan saja
+            decryption += x
 
-    print("Plain text:",text)
-    print("Encrypted text:",decryption)
+    print("Cipher Text: ",text)
+    print("Plain Text : ",decryption)
 
 
-text = input("Enter text: ").upper()
-shift = int(input("Enter shift pattern: "))
-encrypt(text, shift)
+print("==== Caesar Chiper ====")
+print("1. Encrypt")
+print("2. Decrypt")
+print("3. Exit")
+menu = input("Pilih menu : ")
+
+os.system("cls")
+
+if menu == "1":
+    text = input("Enter text: ").upper() # mengubah inputan menjadi huruf kapital
+    shift = int(input("Enter key: ")) # memasukkan kunci pergeseran
+    encrypt(text,shift)
+elif menu == "2":
+    text = input("Enter text: ").upper()
+    shift = int(input("Enter key: "))
+    decrypt(text,shift)
+elif menu == "3":
+    exit()
+else:
+    print("Menu tidak tersedia!")
